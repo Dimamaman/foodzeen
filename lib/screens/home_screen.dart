@@ -117,7 +117,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-                              // Navigation Links
+
+                              /// Navigation Links
                               Row(
                                 children: [
                                   TextButton(
@@ -852,12 +853,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.grey[900],
                 ),
               ),
-              if (showStar)
-                Icon(
-                  Icons.star,
-                  color: Colors.grey[900],
-                  size: 32,
-                ),
+              if (showStar) Icon(Icons.star, color: Colors.grey[900], size: 32),
             ],
           ),
           const SizedBox(height: 12),
