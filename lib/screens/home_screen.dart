@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
 
-                              /// Navigation Links
+                              // Navigation Links
                               Row(
                                 children: [
                                   TextButton(
