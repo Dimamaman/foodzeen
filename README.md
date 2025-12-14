@@ -1,6 +1,6 @@
 # foodzeen
 
-A new Flutter project.
+Flutter web app for calorie counting and nutrition tracking.
 
 ## Getting Started
 
