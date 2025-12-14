@@ -81,7 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 horizontal: isMobile ? 16 : 20,
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   // Logo
                                   Row(
@@ -90,7 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: isMobile ? 36 : 40,
                                         height: isMobile ? 36 : 40,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
                                           gradient: const LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
@@ -234,14 +237,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           final titleSize = isMobile ? 36.0 : 64.0;
                           final taglineSize = isMobile ? 16.0 : 18.0;
                           final horizontalPadding = isMobile ? 20.0 : 40.0;
-                          
+
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(height: isMobile ? 40 : 60),
                               // Main Title
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: horizontalPadding,
+                                ),
                                 child: Text(
                                   'Every Single Day',
                                   style: GoogleFonts.poppins(
@@ -256,7 +261,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               const SizedBox(height: 24),
                               // Tagline
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: horizontalPadding,
+                                ),
                                 child: Text(
                                   'Track your calories, monitor your macros, and achieve your nutrition goals with personalized meal plans and verified nutrition data.',
                                   style: GoogleFonts.poppins(
@@ -271,7 +278,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               // App Store Buttons
                               isMobile
                                   ? Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         _buildAppStoreButton(
                                           icon: Icons.apple,
@@ -295,13 +303,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                               top: -8,
                                               right: -8,
                                               child: Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 12,
-                                                  vertical: 4,
-                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 4,
+                                                    ),
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xFFE91E63),
-                                                  borderRadius: BorderRadius.circular(12),
+                                                  color: const Color(
+                                                    0xFFE91E63,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
                                                 child: const Text(
                                                   'Soon',
@@ -318,7 +330,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     )
                                   : Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         _buildAppStoreButton(
                                           icon: Icons.apple,
@@ -342,13 +355,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                               top: -8,
                                               right: -8,
                                               child: Container(
-                                                padding: const EdgeInsets.symmetric(
-                                                  horizontal: 12,
-                                                  vertical: 4,
-                                                ),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 4,
+                                                    ),
                                                 decoration: BoxDecoration(
-                                                  color: const Color(0xFFE91E63),
-                                                  borderRadius: BorderRadius.circular(12),
+                                                  color: const Color(
+                                                    0xFFE91E63,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
                                                 child: const Text(
                                                   'Soon',
@@ -555,50 +572,52 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (context, cardConstraints) {
                             if (cardConstraints.maxWidth > 800) {
                               return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _buildLovedByCard(
-                                topText: '100K+',
-                                bottomText: 'Active Users',
-                              ),
-                              const SizedBox(width: 24),
-                              _buildLovedByCard(
-                                topText: '4.9★',
-                                bottomText: 'App Store Rating',
-                                showStar: true,
-                              ),
-                              const SizedBox(width: 24),
-                              _buildLovedByCard(
-                                topText: '1M+',
-                                bottomText: 'Meals Tracked',
-                              ),
-                            ],
-                          );
-                        } else {
-                          return Column(
-                            children: [
-                              _buildLovedByCard(
-                                topText: '100K+',
-                                bottomText: 'Active Users',
-                              ),
-                              const SizedBox(height: 24),
-                              _buildLovedByCard(
-                                topText: '4.9★',
-                                bottomText: 'App Store Rating',
-                                showStar: true,
-                              ),
-                              const SizedBox(height: 24),
-                              _buildLovedByCard(
-                                topText: '1M+',
-                                bottomText: 'Meals Tracked',
-                              ),
-                            ],
-                          );
-                        }
-                      },
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _buildLovedByCard(
+                                    topText: '100K+',
+                                    bottomText: 'Active Users',
+                                  ),
+                                  const SizedBox(width: 24),
+                                  _buildLovedByCard(
+                                    topText: '4.9★',
+                                    bottomText: 'App Store Rating',
+                                    showStar: true,
+                                  ),
+                                  const SizedBox(width: 24),
+                                  _buildLovedByCard(
+                                    topText: '1M+',
+                                    bottomText: 'Meals Tracked',
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return Column(
+                                children: [
+                                  _buildLovedByCard(
+                                    topText: '100K+',
+                                    bottomText: 'Active Users',
+                                  ),
+                                  const SizedBox(height: 24),
+                                  _buildLovedByCard(
+                                    topText: '4.9★',
+                                    bottomText: 'App Store Rating',
+                                    showStar: true,
+                                  ),
+                                  const SizedBox(height: 24),
+                                  _buildLovedByCard(
+                                    topText: '1M+',
+                                    bottomText: 'Meals Tracked',
+                                  ),
+                                ],
+                              );
+                            }
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
             // FAQ Section
@@ -771,7 +790,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           child: Column(
             children: [
-              Icon(icon, size: isMobile ? 40 : 48, color: const Color(0xFF6C63FF)),
+              Icon(
+                icon,
+                size: isMobile ? 40 : 48,
+                color: const Color(0xFF6C63FF),
+              ),
               SizedBox(height: isMobile ? 12 : 16),
               Text(
                 title,
@@ -832,72 +855,72 @@ class _HomeScreenState extends State<HomeScreen> {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: isMobile ? 20.0 : 80.0),
           child: Column(
-        children: List.generate(faqs.length, (index) {
-          final faq = faqs[index];
-          final isExpanded = _expandedFaqIndex == index;
+            children: List.generate(faqs.length, (index) {
+              final faq = faqs[index];
+              final isExpanded = _expandedFaqIndex == index;
 
-          return Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    _expandedFaqIndex = isExpanded ? null : index;
-                  });
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          faq['question'] as String,
-                          style: GoogleFonts.poppins(
-                            fontSize: isMobile ? 16 : 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
+              return Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _expandedFaqIndex = isExpanded ? null : index;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              faq['question'] as String,
+                              style: GoogleFonts.poppins(
+                                fontSize: isMobile ? 16 : 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      AnimatedRotation(
-                        turns: isExpanded ? 0.5 : 0,
-                        duration: const Duration(milliseconds: 200),
-                        child: Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.grey[600],
-                          size: 28,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              AnimatedCrossFade(
-                firstChild: const SizedBox.shrink(),
-                secondChild: Container(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      faq['answer'] as String,
-                      style: GoogleFonts.poppins(
-                        fontSize: isMobile ? 14 : 16,
-                        color: Colors.grey[700],
-                        height: 1.6,
+                          AnimatedRotation(
+                            turns: isExpanded ? 0.5 : 0,
+                            duration: const Duration(milliseconds: 200),
+                            child: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.grey[600],
+                              size: 28,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ),
-                crossFadeState: isExpanded
-                    ? CrossFadeState.showSecond
-                    : CrossFadeState.showFirst,
-                duration: const Duration(milliseconds: 200),
-              ),
-              if (index < faqs.length - 1)
-                Divider(thickness: 0.5, color: Colors.grey[300]),
-            ],
-          );
-        }),
+                  AnimatedCrossFade(
+                    firstChild: const SizedBox.shrink(),
+                    secondChild: Container(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          faq['answer'] as String,
+                          style: GoogleFonts.poppins(
+                            fontSize: isMobile ? 14 : 16,
+                            color: Colors.grey[700],
+                            height: 1.6,
+                          ),
+                        ),
+                      ),
+                    ),
+                    crossFadeState: isExpanded
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                    duration: const Duration(milliseconds: 200),
+                  ),
+                  if (index < faqs.length - 1)
+                    Divider(thickness: 0.5, color: Colors.grey[300]),
+                ],
+              );
+            }),
           ),
         );
       },
@@ -917,81 +940,81 @@ class _HomeScreenState extends State<HomeScreen> {
         return Container(
           width: isMobile ? double.infinity : 280,
           padding: EdgeInsets.all(isMobile ? 24 : 32),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFCFBF7),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          if (showLaurel)
-            Positioned(
-              left: 16,
-              top: 0,
-              bottom: 0,
-              child: Icon(
-                Icons.emoji_events,
-                size: 60,
-                color: Colors.grey[400],
+          decoration: BoxDecoration(
+            color: const Color(0xFFFCFBF7),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
               ),
-            ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                topText,
-                style: GoogleFonts.poppins(
-                  fontSize: isMobile ? 42 : 56,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFFB8860B),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                middleText,
-                style: GoogleFonts.poppins(
-                  fontSize: isMobile ? 16 : 20,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              if (showStars) ...[
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(5, (index) {
-                    return Icon(
-                      Icons.star,
-                      color: const Color(0xFFB8860B),
-                      size: 24,
-                    );
-                  }),
-                ),
-              ],
-              if (bottomText.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                Text(
-                  bottomText,
-                  style: GoogleFonts.poppins(
-                    fontSize: isMobile ? 16 : 20,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
             ],
           ),
-        ],
-      ),
+          child: Stack(
+            children: [
+              if (showLaurel)
+                Positioned(
+                  left: 16,
+                  top: 0,
+                  bottom: 0,
+                  child: Icon(
+                    Icons.emoji_events,
+                    size: 60,
+                    color: Colors.grey[400],
+                  ),
+                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    topText,
+                    style: GoogleFonts.poppins(
+                      fontSize: isMobile ? 42 : 56,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFFB8860B),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    middleText,
+                    style: GoogleFonts.poppins(
+                      fontSize: isMobile ? 16 : 20,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  if (showStars) ...[
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(5, (index) {
+                        return Icon(
+                          Icons.star,
+                          color: const Color(0xFFB8860B),
+                          size: 24,
+                        );
+                      }),
+                    ),
+                  ],
+                  if (bottomText.isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      bottomText,
+                      style: GoogleFonts.poppins(
+                        fontSize: isMobile ? 16 : 20,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
@@ -1008,51 +1031,51 @@ class _HomeScreenState extends State<HomeScreen> {
         return Container(
           width: isMobile ? double.infinity : 280,
           padding: EdgeInsets.all(isMobile ? 24 : 32),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                topText,
-                style: GoogleFonts.poppins(
-                  fontSize: isMobile ? 36 : 48,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[900],
-                ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
-              if (showStar)
-                Icon(
-                  Icons.star,
-                  color: Colors.grey[900],
-                  size: isMobile ? 28 : 32,
-                ),
             ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            bottomText,
-            style: GoogleFonts.poppins(
-              fontSize: isMobile ? 14 : 16,
-              fontWeight: FontWeight.normal,
-              color: Colors.grey[700],
-            ),
-            textAlign: TextAlign.center,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    topText,
+                    style: GoogleFonts.poppins(
+                      fontSize: isMobile ? 36 : 48,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[900],
+                    ),
+                  ),
+                  if (showStar)
+                    Icon(
+                      Icons.star,
+                      color: Colors.grey[900],
+                      size: isMobile ? 28 : 32,
+                    ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                bottomText,
+                style: GoogleFonts.poppins(
+                  fontSize: isMobile ? 14 : 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey[700],
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-        ],
-      ),
         );
       },
     );
