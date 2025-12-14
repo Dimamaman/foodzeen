@@ -390,7 +390,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Additional Content Sections with Blur Effect
+
+            /// Additional Content Sections with Blur Effect
             SliverToBoxAdapter(
               child: ClipRect(
                 child: BackdropFilter(
