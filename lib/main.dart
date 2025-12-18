@@ -16,6 +16,17 @@ class FoodZeenApp extends StatelessWidget {
       title: 'Foodzeen',
       debugShowCheckedModeBanner: false,
       showSemanticsDebugger: false,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaler: MediaQuery.of(context).textScaler.clamp(
+              minScaleFactor: 0.8,
+              maxScaleFactor: 1.2,
+            ),
+          ),
+          child: child!,
+        );
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF6C63FF),

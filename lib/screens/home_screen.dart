@@ -49,6 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -131,122 +133,65 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                   // Navigation Links
-                                  isMobile
-                                      ? PopupMenuButton<String>(
-                                          icon: Icon(
-                                            Icons.more_vert,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ContactUsScreen(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          'Contact Us',
+                                          style: GoogleFonts.poppins(
                                             color: Colors.black87,
+                                            fontSize: textSize,
                                           ),
-                                          onSelected: (value) {
-                                            if (value == 'contact') {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const ContactUsScreen(),
-                                                ),
-                                              );
-                                            } else if (value == 'terms') {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const TermsOfUseScreen(),
-                                                ),
-                                              );
-                                            } else if (value == 'privacy') {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const PrivacyPolicyScreen(),
-                                                ),
-                                              );
-                                            }
-                                          },
-                                          itemBuilder: (context) => [
-                                            PopupMenuItem(
-                                              value: 'contact',
-                                              child: Text(
-                                                'Contact Us',
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              value: 'terms',
-                                              child: Text(
-                                                'Terms',
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              value: 'privacy',
-                                              child: Text(
-                                                'Privacy',
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const ContactUsScreen(),
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                'Contact Us',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black87,
-                                                  fontSize: textSize,
-                                                ),
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const TermsOfUseScreen(),
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                'Terms',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black87,
-                                                  fontSize: textSize,
-                                                ),
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const PrivacyPolicyScreen(),
-                                                  ),
-                                                );
-                                              },
-                                              child: Text(
-                                                'Privacy',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black87,
-                                                  fontSize: textSize,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
                                         ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const TermsOfUseScreen(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          'Terms',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black87,
+                                            fontSize: textSize,
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PrivacyPolicyScreen(),
+                                            ),
+                                          );
+                                        },
+                                        child: Text(
+                                          'Privacy',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black87,
+                                            fontSize: textSize,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             );
@@ -266,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       final isMobile = constraints.maxWidth < 600;
-                      final titleSize = isMobile ? 16.0 : 64.0;
+                      final titleSize = isMobile ? 28.0 : 64.0;
                       final taglineSize = isMobile ? 16.0 : 18.0;
                       final horizontalPadding = isMobile ? 20.0 : 40.0;
 

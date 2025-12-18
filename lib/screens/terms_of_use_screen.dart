@@ -31,7 +31,6 @@ class TermsOfUseScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
               // App Bar
               Padding(

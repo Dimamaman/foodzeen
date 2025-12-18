@@ -87,7 +87,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         ),
         child: SafeArea(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
               // App Bar
               Padding(
