@@ -60,15 +60,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: CustomScrollView(
           controller: _scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             // App Bar with Blur Effect
             SliverAppBar(
-              expandedHeight: 50,
-              collapsedHeight: 65,
+              expandedHeight: 80,
+              collapsedHeight: 70,
               pinned: true,
               floating: false,
               elevation: 0,
               backgroundColor: Colors.transparent,
+              toolbarHeight: 70,
               flexibleSpace: FlexibleSpaceBar(
                 background: ClipRect(
                   child: BackdropFilter(
@@ -133,64 +135,90 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                   // Navigation Links
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ContactUsScreen(),
+                                  Flexible(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ContactUsScreen(),
+                                              ),
+                                            );
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: isMobile ? 4 : 8,
+                                              vertical: 4,
                                             ),
-                                          );
-                                        },
-                                        child: Text(
-                                          'Contact Us',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.black87,
-                                            fontSize: textSize,
+                                            minimumSize: Size.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          ),
+                                          child: Text(
+                                            'Contact Us',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.black87,
+                                              fontSize: isMobile ? 10 : textSize,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const TermsOfUseScreen(),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const TermsOfUseScreen(),
+                                              ),
+                                            );
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: isMobile ? 4 : 8,
+                                              vertical: 4,
                                             ),
-                                          );
-                                        },
-                                        child: Text(
-                                          'Terms',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.black87,
-                                            fontSize: textSize,
+                                            minimumSize: Size.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          ),
+                                          child: Text(
+                                            'Terms',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.black87,
+                                              fontSize: isMobile ? 10 : textSize,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const PrivacyPolicyScreen(),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const PrivacyPolicyScreen(),
+                                              ),
+                                            );
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: isMobile ? 4 : 8,
+                                              vertical: 4,
                                             ),
-                                          );
-                                        },
-                                        child: Text(
-                                          'Privacy',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.black87,
-                                            fontSize: textSize,
+                                            minimumSize: Size.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          ),
+                                          child: Text(
+                                            'Privacy',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.black87,
+                                              fontSize: isMobile ? 10 : textSize,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -206,6 +234,10 @@ class _HomeScreenState extends State<HomeScreen> {
             // Hero Section
             SliverToBoxAdapter(
               child: Container(
+                width: double.infinity,
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height * 0.6,
+                ),
                 color: Colors.transparent,
                 child: Center(
                   child: LayoutBuilder(
@@ -217,6 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           SizedBox(height: isMobile ? 40 : 60),
                           // Main Title
