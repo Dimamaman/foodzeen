@@ -63,7 +63,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    final isSmallScreen = screenWidth < 400;
 
     // Same gradient colors as home screen
     const gradientColors = [
@@ -74,6 +76,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -83,25 +87,36 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         ),
         child: SafeArea(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               // App Bar
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: isMobile ? 16 : 24,
-                  vertical: 16,
+                  horizontal: isSmallScreen ? 12 : isMobile ? 16 : 24,
+                  vertical: isSmallScreen ? 12 : 16,
                 ),
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.black87),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    Text(
-                      'Contact Us',
-                      style: GoogleFonts.poppins(
-                        fontSize: isMobile ? 20 : 24,
-                        fontWeight: FontWeight.bold,
+                      icon: Icon(
+                        Icons.arrow_back,
                         color: Colors.black87,
+                        size: isSmallScreen ? 20 : 24,
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Contact Us',
+                        style: GoogleFonts.poppins(
+                          fontSize: isSmallScreen ? 16 : isMobile ? 20 : 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -111,8 +126,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 20 : 40,
-                    vertical: 20,
+                    horizontal: isSmallScreen ? 12 : isMobile ? 16 : 40,
+                    vertical: isSmallScreen ? 12 : 20,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +136,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       Text(
                         'Send us a message',
                         style: GoogleFonts.poppins(
-                          fontSize: isMobile ? 20 : 24,
+                          fontSize: isSmallScreen ? 18 : isMobile ? 20 : 24,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
                         ),
@@ -155,7 +170,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         maxLines: 6,
                         isMobile: isMobile,
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: isSmallScreen ? 24 : 32),
                       // Submit Button
                       SizedBox(
                         width: double.infinity,
@@ -168,8 +183,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               : CupertinoColors.inactiveGray,
                           borderRadius: BorderRadius.circular(12),
                           padding: EdgeInsets.symmetric(
-                            vertical: isMobile ? 16 : 18,
+                            vertical: isSmallScreen ? 14 : isMobile ? 16 : 18,
                           ),
+                          minSize: isSmallScreen ? 44 : 48,
                           child: _isSubmitting
                               ? const CupertinoActivityIndicator(
                                   color: CupertinoColors.white,
@@ -177,7 +193,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               : Text(
                                   'Submit',
                                   style: GoogleFonts.poppins(
-                                    fontSize: isMobile ? 16 : 18,
+                                    fontSize: isSmallScreen ? 14 : isMobile ? 16 : 18,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),
@@ -205,9 +221,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     TextInputType? keyboardType,
     int maxLines = 1,
   }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 400;
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      margin: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: isSmallScreen ? 12 : 16,
+        vertical: 4,
+      ),
       decoration: BoxDecoration(
         color: CupertinoColors.white,
         borderRadius: BorderRadius.circular(12),
@@ -220,21 +241,28 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 4, top: 8, bottom: 4),
+            padding: EdgeInsets.only(
+              left: 4,
+              top: isSmallScreen ? 6 : 8,
+              bottom: 4,
+            ),
             child: Row(
               children: [
                 Icon(
                   icon,
                   color: CupertinoColors.activeGreen,
-                  size: isMobile ? 18 : 20,
+                  size: isSmallScreen ? 16 : isMobile ? 18 : 20,
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  label,
-                  style: GoogleFonts.poppins(
-                    fontSize: isMobile ? 12 : 14,
-                    color: CupertinoColors.secondaryLabel,
-                    fontWeight: FontWeight.w500,
+                SizedBox(width: isSmallScreen ? 6 : 8),
+                Flexible(
+                  child: Text(
+                    label,
+                    style: GoogleFonts.poppins(
+                      fontSize: isSmallScreen ? 11 : isMobile ? 12 : 14,
+                      color: CupertinoColors.secondaryLabel,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
@@ -247,14 +275,17 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             minLines: maxLines > 1 ? maxLines : 1,
             placeholder: hint,
             placeholderStyle: GoogleFonts.poppins(
-              fontSize: isMobile ? 14 : 16,
+              fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
               color: CupertinoColors.placeholderText,
             ),
             style: GoogleFonts.poppins(
-              fontSize: isMobile ? 14 : 16,
+              fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
               color: CupertinoColors.label,
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+            padding: EdgeInsets.symmetric(
+              horizontal: 4,
+              vertical: isSmallScreen ? 10 : 12,
+            ),
             decoration: const BoxDecoration(),
           ),
         ],

@@ -7,7 +7,9 @@ class TermsOfUseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    final isSmallScreen = screenWidth < 400;
 
     // Same gradient colors as home screen
     const gradientColors = [
@@ -18,6 +20,8 @@ class TermsOfUseScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -27,25 +31,36 @@ class TermsOfUseScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               // App Bar
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: isMobile ? 16 : 24,
-                  vertical: 16,
+                  horizontal: isSmallScreen ? 12 : isMobile ? 16 : 24,
+                  vertical: isSmallScreen ? 12 : 16,
                 ),
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.black87),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    Text(
-                      'Terms of Use',
-                      style: GoogleFonts.poppins(
-                        fontSize: isMobile ? 20 : 24,
-                        fontWeight: FontWeight.bold,
+                      icon: Icon(
+                        Icons.arrow_back,
                         color: Colors.black87,
+                        size: isSmallScreen ? 20 : 24,
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Terms of Use',
+                        style: GoogleFonts.poppins(
+                          fontSize: isSmallScreen ? 16 : isMobile ? 20 : 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
@@ -55,8 +70,8 @@ class TermsOfUseScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 20 : 40,
-                    vertical: 20,
+                    horizontal: isSmallScreen ? 12 : isMobile ? 16 : 40,
+                    vertical: isSmallScreen ? 12 : 20,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +79,7 @@ class TermsOfUseScreen extends StatelessWidget {
                       Text(
                         'Terms of Use',
                         style: GoogleFonts.poppins(
-                          fontSize: isMobile ? 28 : 32,
+                          fontSize: isSmallScreen ? 22 : isMobile ? 28 : 32,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
@@ -73,7 +88,7 @@ class TermsOfUseScreen extends StatelessWidget {
                       Text(
                         'Last Updated: Nov 25, 2025',
                         style: GoogleFonts.poppins(
-                          fontSize: isMobile ? 14 : 16,
+                          fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
                           color: Colors.grey[700],
                         ),
                       ),
@@ -81,71 +96,82 @@ class TermsOfUseScreen extends StatelessWidget {
                       _buildParagraph(
                         'Thank you for using FoodZeen! These Terms of Use ("Terms") govern your access to and use of the FoodZeen mobile application (the "App"), including all features, content, and services we offer. By using the App, you agree to these Terms — so please take a moment to read them carefully.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('1. Using FoodZeen', isMobile),
+                      _buildHeading('1. Using FoodZeen', isMobile, isSmallScreen),
                       _buildParagraph(
                         'When you use FoodZeen, you agree to use it responsibly and respectfully. You must be at least 13 years old to use the app. Some features may require you to create an account using your email and a secure password.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('2. Subscriptions', isMobile),
+                      _buildHeading('2. Subscriptions', isMobile, isSmallScreen),
                       _buildParagraph(
                         'Some features of FoodZeen are available through a paid subscription. Subscriptions automatically renew unless cancelled at least 24 hours before the current period ends. You can manage or cancel your subscription at any time in your device\'s Account Settings.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('3. Privacy', isMobile),
+                      _buildHeading('3. Privacy', isMobile, isSmallScreen),
                       _buildParagraph(
                         'Your privacy is important to us. We securely store the information you provide and process it in line with our Privacy Policy. By using the app, you agree to how we collect and use data as described there.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('4. Health Disclaimer', isMobile),
+                      _buildHeading('4. Health Disclaimer', isMobile, isSmallScreen),
                       _buildParagraph(
                         'FoodZeen is not a medical app and does not provide professional medical advice. All recommendations and feedback are based on the information you provide and are intended for general wellness and educational purposes only.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 12),
                       _buildParagraph(
                         'We encourage you to consult with a qualified healthcare provider before making any changes to your diet, exercise, or health routine.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('5. Changes to the App', isMobile),
+                      _buildHeading('5. Changes to the App', isMobile, isSmallScreen),
                       _buildParagraph(
                         'We are constantly improving FoodZeen. That means features may change or be updated from time to time. We may also update these Terms when needed. When we do, we\'ll let you know via the app or by email.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('6. Your Data', isMobile),
+                      _buildHeading('6. Your Data', isMobile, isSmallScreen),
                       _buildParagraph(
                         'You always own your data. You can delete your account at any time. If you delete your account, your personal data and history will be permanently removed from our systems unless required by law to retain it longer.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('7. Intellectual Property', isMobile),
+                      _buildHeading('7. Intellectual Property', isMobile, isSmallScreen),
                       _buildParagraph(
                         'The FoodZeen name, logo, design, and all content inside the app (unless uploaded by you) belong to FoodZeen or our trusted partners. Please don\'t copy, sell, or misuse any part of it.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('8. Account Suspension', isMobile),
+                      _buildHeading('8. Account Suspension', isMobile, isSmallScreen),
                       _buildParagraph(
                         'We reserve the right to suspend or terminate access to the app if we find that someone is violating these Terms or using the service in a harmful or abusive way.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 24),
-                      _buildHeading('9. Contact Us', isMobile),
+                      _buildHeading('9. Contact Us', isMobile, isSmallScreen),
                       _buildParagraph(
                         'Have questions or concerns? We\'d love to help.',
                         isMobile,
+                        isSmallScreen,
                       ),
                       const SizedBox(height: 8),
                       _buildBulletList([
                         'Email: dimamamanov37@gmail.com',
                         'Address: Buyuk Ipak Yuli Street, 12, Tashkent',
-                      ], isMobile),
+                      ], isMobile, isSmallScreen),
                       const SizedBox(height: 32),
                       Center(
                         child: Text(
@@ -168,24 +194,24 @@ class TermsOfUseScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeading(String text, bool isMobile) {
+  Widget _buildHeading(String text, bool isMobile, bool isSmallScreen) {
     return Text(
       text,
       style: GoogleFonts.poppins(
-        fontSize: isMobile ? 20 : 24,
+        fontSize: isSmallScreen ? 18 : isMobile ? 20 : 24,
         fontWeight: FontWeight.bold,
         color: Colors.black87,
       ),
     );
   }
 
-  Widget _buildParagraph(String text, bool isMobile) {
+  Widget _buildParagraph(String text, bool isMobile, bool isSmallScreen) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Text(
         text,
         style: GoogleFonts.poppins(
-          fontSize: isMobile ? 14 : 16,
+          fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
           color: Colors.black87,
           height: 1.6,
         ),
@@ -193,7 +219,7 @@ class TermsOfUseScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBulletList(List<String> items, bool isMobile) {
+  Widget _buildBulletList(List<String> items, bool isMobile, bool isSmallScreen) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: items.map((item) {
@@ -205,7 +231,7 @@ class TermsOfUseScreen extends StatelessWidget {
               Text(
                 '• ',
                 style: GoogleFonts.poppins(
-                  fontSize: isMobile ? 14 : 16,
+                  fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
                   color: Colors.black87,
                   height: 1.6,
                 ),
@@ -214,7 +240,7 @@ class TermsOfUseScreen extends StatelessWidget {
                 child: Text(
                   item,
                   style: GoogleFonts.poppins(
-                    fontSize: isMobile ? 14 : 16,
+                    fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
                     color: Colors.black87,
                     height: 1.6,
                   ),

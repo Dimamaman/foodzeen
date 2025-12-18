@@ -3,9 +3,10 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'contact_us_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_use_screen.dart';
-import 'contact_us_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -265,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       final isMobile = constraints.maxWidth < 600;
-                      final titleSize = isMobile ? 36.0 : 64.0;
+                      final titleSize = isMobile ? 16.0 : 64.0;
                       final taglineSize = isMobile ? 16.0 : 18.0;
                       final horizontalPadding = isMobile ? 20.0 : 40.0;
 
@@ -279,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               horizontal: horizontalPadding,
                             ),
                             child: Text(
-                              'Every Single Day',
+                              'Every Single Day With FoodZeen',
                               style: GoogleFonts.poppins(
                                 fontSize: titleSize,
                                 fontWeight: FontWeight.bold,
