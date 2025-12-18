@@ -60,7 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: CustomScrollView(
           controller: _scrollController,
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           slivers: [
             // App Bar with Blur Effect
             SliverAppBar(
@@ -236,22 +238,24 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 width: double.infinity,
                 constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.6,
+                  minHeight: MediaQuery.of(context).size.height * 0.7,
                 ),
                 color: Colors.transparent,
-                child: Center(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final isMobile = constraints.maxWidth < 600;
-                      final titleSize = isMobile ? 28.0 : 64.0;
-                      final taglineSize = isMobile ? 16.0 : 18.0;
-                      final horizontalPadding = isMobile ? 20.0 : 40.0;
+                padding: EdgeInsets.symmetric(
+                  vertical: MediaQuery.of(context).size.height * 0.1,
+                ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    final titleSize = isMobile ? 28.0 : 64.0;
+                    final taglineSize = isMobile ? 16.0 : 18.0;
+                    final horizontalPadding = isMobile ? 20.0 : 40.0;
 
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(height: isMobile ? 40 : 60),
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
                           // Main Title
                           Padding(
                             padding: EdgeInsets.symmetric(
@@ -342,13 +346,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                         ],
                       );
-                    },
-                  ),
+                  },
                 ),
               ),
             ),
 
-            SliverToBoxAdapter(child: SizedBox(height: 50)),
+            SliverToBoxAdapter(child: SizedBox(height: 40)),
 
             // Loved by Thousands Section
             SliverToBoxAdapter(
