@@ -58,204 +58,221 @@ class _HomeScreenState extends State<HomeScreen> {
             colors: gradientColors,
           ),
         ),
-        child: CustomScrollView(
+        child: Scrollbar(
           controller: _scrollController,
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          slivers: [
-            // App Bar with Blur Effect
-            SliverAppBar(
-              expandedHeight: 80,
-              collapsedHeight: 70,
-              pinned: true,
-              floating: false,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              toolbarHeight: 70,
-              flexibleSpace: FlexibleSpaceBar(
-                background: ClipRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: blurIntensity,
-                      sigmaY: blurIntensity,
-                    ),
-                    child: Container(
-                      color: Colors.transparent,
-                      child: SafeArea(
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            final isMobile = constraints.maxWidth < 600;
-                            final textSize = isMobile ? 12.0 : 14.0;
-                            return Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: isMobile ? 16 : 20,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Logo
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: isMobile ? 36 : 40,
-                                        height: isMobile ? 36 : 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            20,
-                                          ),
-                                          gradient: const LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              CupertinoColors.activeGreen,
-                                              Color(0xFF4A90E2),
-                                            ],
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'FZ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: isMobile ? 14 : 16,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: isMobile ? 8 : 12),
-                                      Text(
-                                        'FoodZeen',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: isMobile ? 18 : 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  // Navigation Links
-                                  Flexible(
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
+          thumbVisibility: true,
+          thickness: 4.0,
+          radius: const Radius.circular(2.0),
+          child: CustomScrollView(
+            controller: _scrollController,
+            physics: const ClampingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            slivers: [
+              // App Bar with Blur Effect
+              SliverAppBar(
+                expandedHeight: 80,
+                collapsedHeight: 70,
+                pinned: true,
+                floating: false,
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                toolbarHeight: 70,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: blurIntensity,
+                        sigmaY: blurIntensity,
+                      ),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: SafeArea(
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              final isMobile = constraints.maxWidth < 600;
+                              final textSize = isMobile ? 12.0 : 14.0;
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isMobile ? 16 : 20,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    // Logo
+                                    Row(
                                       children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ContactUsScreen(),
-                                              ),
-                                            );
-                                          },
-                                          style: TextButton.styleFrom(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: isMobile ? 4 : 8,
-                                              vertical: 4,
+                                        Container(
+                                          width: isMobile ? 36 : 40,
+                                          height: isMobile ? 36 : 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              20,
                                             ),
-                                            minimumSize: Size.zero,
-                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                            gradient: const LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                CupertinoColors.activeGreen,
+                                                Color(0xFF4A90E2),
+                                              ],
+                                            ),
                                           ),
-                                          child: Text(
-                                            'Contact Us',
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.black87,
-                                              fontSize: isMobile ? 10 : textSize,
+                                          child: Center(
+                                            child: Text(
+                                              'FZ',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: isMobile ? 14 : 16,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const TermsOfUseScreen(),
-                                              ),
-                                            );
-                                          },
-                                          style: TextButton.styleFrom(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: isMobile ? 4 : 8,
-                                              vertical: 4,
-                                            ),
-                                            minimumSize: Size.zero,
-                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                          ),
-                                          child: Text(
-                                            'Terms',
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.black87,
-                                              fontSize: isMobile ? 10 : textSize,
-                                            ),
-                                          ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const PrivacyPolicyScreen(),
-                                              ),
-                                            );
-                                          },
-                                          style: TextButton.styleFrom(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: isMobile ? 4 : 8,
-                                              vertical: 4,
-                                            ),
-                                            minimumSize: Size.zero,
-                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                          ),
-                                          child: Text(
-                                            'Privacy',
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.black87,
-                                              fontSize: isMobile ? 10 : textSize,
-                                            ),
+                                        SizedBox(width: isMobile ? 8 : 12),
+                                        Text(
+                                          'FoodZeen',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: isMobile ? 18 : 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black87,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                                    // Navigation Links
+                                    Flexible(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const ContactUsScreen(),
+                                                ),
+                                              );
+                                            },
+                                            style: TextButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: isMobile ? 4 : 8,
+                                                vertical: 4,
+                                              ),
+                                              minimumSize: Size.zero,
+                                              tapTargetSize:
+                                                  MaterialTapTargetSize
+                                                      .shrinkWrap,
+                                            ),
+                                            child: Text(
+                                              'Contact Us',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.black87,
+                                                fontSize: isMobile
+                                                    ? 10
+                                                    : textSize,
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const TermsOfUseScreen(),
+                                                ),
+                                              );
+                                            },
+                                            style: TextButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: isMobile ? 4 : 8,
+                                                vertical: 4,
+                                              ),
+                                              minimumSize: Size.zero,
+                                              tapTargetSize:
+                                                  MaterialTapTargetSize
+                                                      .shrinkWrap,
+                                            ),
+                                            child: Text(
+                                              'Terms',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.black87,
+                                                fontSize: isMobile
+                                                    ? 10
+                                                    : textSize,
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PrivacyPolicyScreen(),
+                                                ),
+                                              );
+                                            },
+                                            style: TextButton.styleFrom(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: isMobile ? 4 : 8,
+                                                vertical: 4,
+                                              ),
+                                              minimumSize: Size.zero,
+                                              tapTargetSize:
+                                                  MaterialTapTargetSize
+                                                      .shrinkWrap,
+                                            ),
+                                            child: Text(
+                                              'Privacy',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.black87,
+                                                fontSize: isMobile
+                                                    ? 10
+                                                    : textSize,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            // Hero Section
-            SliverToBoxAdapter(
-              child: Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height * 0.7,
-                ),
-                color: Colors.transparent,
-                padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.height * 0.1,
-                ),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isMobile = constraints.maxWidth < 600;
-                    final titleSize = isMobile ? 28.0 : 64.0;
-                    final taglineSize = isMobile ? 16.0 : 18.0;
-                    final horizontalPadding = isMobile ? 20.0 : 40.0;
+              // Hero Section
+              SliverToBoxAdapter(
+                child: Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height * 0.7,
+                  ),
+                  color: Colors.transparent,
+                  padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isMobile = constraints.maxWidth < 600;
+                      final titleSize = isMobile ? 28.0 : 64.0;
+                      final taglineSize = isMobile ? 16.0 : 18.0;
+                      final horizontalPadding = isMobile ? 20.0 : 40.0;
 
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
                           // Main Title
                           Padding(
                             padding: EdgeInsets.symmetric(
@@ -346,145 +363,146 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                         ],
                       );
+                    },
+                  ),
+                ),
+              ),
+
+              SliverToBoxAdapter(child: SizedBox(height: 40)),
+
+              // Loved by Thousands Section
+              SliverToBoxAdapter(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    return Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobile ? 20 : 40,
+                        vertical: isMobile ? 60 : 0,
+                      ),
+                      child: Column(
+                        children: [
+                          // Main Heading
+                          Text(
+                            'Loved by thousands',
+                            style: GoogleFonts.poppins(
+                              fontSize: isMobile ? 32 : 48,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[900],
+                              letterSpacing: -0.5,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 16),
+                          // Subheading
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isMobile ? 20 : 0,
+                            ),
+                            child: Text(
+                              'Join 100,000+ people tracking smarter with AI',
+                              style: GoogleFonts.poppins(
+                                fontSize: isMobile ? 16 : 20,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey[700],
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(height: isMobile ? 40 : 60),
+                          // Stats Cards
+                          LayoutBuilder(
+                            builder: (context, cardConstraints) {
+                              if (cardConstraints.maxWidth > 800) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    _buildLovedByCard(
+                                      topText: '100K+',
+                                      bottomText: 'Active Users',
+                                    ),
+                                    const SizedBox(width: 24),
+                                    _buildLovedByCard(
+                                      topText: '4.9★',
+                                      bottomText: 'App Store Rating',
+                                      showStar: true,
+                                    ),
+                                    const SizedBox(width: 24),
+                                    _buildLovedByCard(
+                                      topText: '1M+',
+                                      bottomText: 'Meals Tracked',
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return Column(
+                                  children: [
+                                    _buildLovedByCard(
+                                      topText: '100K+',
+                                      bottomText: 'Active Users',
+                                    ),
+                                    const SizedBox(height: 24),
+                                    _buildLovedByCard(
+                                      topText: '4.9★',
+                                      bottomText: 'App Store Rating',
+                                      showStar: true,
+                                    ),
+                                    const SizedBox(height: 24),
+                                    _buildLovedByCard(
+                                      topText: '1M+',
+                                      bottomText: 'Meals Tracked',
+                                    ),
+                                  ],
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),
-            ),
-
-            SliverToBoxAdapter(child: SizedBox(height: 40)),
-
-            // Loved by Thousands Section
-            SliverToBoxAdapter(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final isMobile = constraints.maxWidth < 600;
-                  return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 20 : 40,
-                      vertical: isMobile ? 60 : 0,
-                    ),
-                    child: Column(
-                      children: [
-                        // Main Heading
-                        Text(
-                          'Loved by thousands',
-                          style: GoogleFonts.poppins(
-                            fontSize: isMobile ? 32 : 48,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[900],
-                            letterSpacing: -0.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        // Subheading
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: isMobile ? 20 : 0,
-                          ),
-                          child: Text(
-                            'Join 100,000+ people tracking smarter with AI',
-                            style: GoogleFonts.poppins(
-                              fontSize: isMobile ? 16 : 20,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.grey[700],
+              // FAQ Section
+              SliverToBoxAdapter(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    return Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isMobile ? 20 : 40,
+                        vertical: isMobile ? 60 : 80,
+                      ),
+                      color: Colors.transparent,
+                      child: Column(
+                        children: [
+                          // FAQ Title
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isMobile ? 20 : 0,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        SizedBox(height: isMobile ? 40 : 60),
-                        // Stats Cards
-                        LayoutBuilder(
-                          builder: (context, cardConstraints) {
-                            if (cardConstraints.maxWidth > 800) {
-                              return Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  _buildLovedByCard(
-                                    topText: '100K+',
-                                    bottomText: 'Active Users',
-                                  ),
-                                  const SizedBox(width: 24),
-                                  _buildLovedByCard(
-                                    topText: '4.9★',
-                                    bottomText: 'App Store Rating',
-                                    showStar: true,
-                                  ),
-                                  const SizedBox(width: 24),
-                                  _buildLovedByCard(
-                                    topText: '1M+',
-                                    bottomText: 'Meals Tracked',
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Column(
-                                children: [
-                                  _buildLovedByCard(
-                                    topText: '100K+',
-                                    bottomText: 'Active Users',
-                                  ),
-                                  const SizedBox(height: 24),
-                                  _buildLovedByCard(
-                                    topText: '4.9★',
-                                    bottomText: 'App Store Rating',
-                                    showStar: true,
-                                  ),
-                                  const SizedBox(height: 24),
-                                  _buildLovedByCard(
-                                    topText: '1M+',
-                                    bottomText: 'Meals Tracked',
-                                  ),
-                                ],
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            // FAQ Section
-            SliverToBoxAdapter(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final isMobile = constraints.maxWidth < 600;
-                  return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 20 : 40,
-                      vertical: isMobile ? 60 : 80,
-                    ),
-                    color: Colors.transparent,
-                    child: Column(
-                      children: [
-                        // FAQ Title
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: isMobile ? 20 : 0,
-                          ),
-                          child: Text(
-                            'Frequently asked questions',
-                            style: GoogleFonts.poppins(
-                              fontSize: isMobile ? 28 : 36,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
-                              letterSpacing: 1.13,
+                            child: Text(
+                              'Frequently asked questions',
+                              style: GoogleFonts.poppins(
+                                fontSize: isMobile ? 28 : 36,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                                letterSpacing: 1.13,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        ),
-                        SizedBox(height: isMobile ? 40 : 60),
-                        // FAQ Items
-                        _buildFaqSection(),
-                      ],
-                    ),
-                  );
-                },
+                          SizedBox(height: isMobile ? 40 : 60),
+                          // FAQ Items
+                          _buildFaqSection(),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
