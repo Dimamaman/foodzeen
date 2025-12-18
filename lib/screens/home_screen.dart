@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'privacy_policy_screen.dart';
+import 'terms_of_use_screen.dart';
+import 'contact_us_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -133,7 +136,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Icons.more_vert,
                                             color: Colors.black87,
                                           ),
-                                          onSelected: (value) {},
+                                          onSelected: (value) {
+                                            if (value == 'contact') {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const ContactUsScreen(),
+                                                ),
+                                              );
+                                            } else if (value == 'terms') {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const TermsOfUseScreen(),
+                                                ),
+                                              );
+                                            } else if (value == 'privacy') {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PrivacyPolicyScreen(),
+                                                ),
+                                              );
+                                            }
+                                          },
                                           itemBuilder: (context) => [
                                             PopupMenuItem(
                                               value: 'contact',
@@ -162,7 +191,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const ContactUsScreen(),
+                                                  ),
+                                                );
+                                              },
                                               child: Text(
                                                 'Contact Us',
                                                 style: GoogleFonts.poppins(
@@ -172,7 +209,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                             TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const TermsOfUseScreen(),
+                                                  ),
+                                                );
+                                              },
                                               child: Text(
                                                 'Terms',
                                                 style: GoogleFonts.poppins(
@@ -182,7 +227,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                             TextButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const PrivacyPolicyScreen(),
+                                                  ),
+                                                );
+                                              },
                                               child: Text(
                                                 'Privacy',
                                                 style: GoogleFonts.poppins(
