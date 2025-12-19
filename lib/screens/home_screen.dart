@@ -126,72 +126,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                   // Navigation Links
-                                  isMobile
-                                      ? PopupMenuButton<String>(
-                                          icon: Icon(
-                                            Icons.more_vert,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Contact Us',
+                                          style: GoogleFonts.poppins(
                                             color: Colors.black87,
+                                            fontSize: 14,
                                           ),
-                                          onSelected: (value) {},
-                                          itemBuilder: (context) => [
-                                            PopupMenuItem(
-                                              value: 'contact',
-                                              child: Text(
-                                                'Contact Us',
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              value: 'terms',
-                                              child: Text(
-                                                'Terms',
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                            ),
-                                            PopupMenuItem(
-                                              value: 'privacy',
-                                              child: Text(
-                                                'Privacy',
-                                                style: GoogleFonts.poppins(),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            TextButton(
-                                              onPressed: () {},
-                                              child: Text(
-                                                'Contact Us',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black87,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {},
-                                              child: Text(
-                                                'Terms',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black87,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {},
-                                              child: Text(
-                                                'Privacy',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black87,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
                                         ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Terms',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black87,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Privacy',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.black87,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             );
@@ -205,317 +174,155 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // Hero Section
             SliverToBoxAdapter(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.85,
-                color: Colors.transparent,
-                child: Stack(
-                  children: [
-                    // Faded background text
-                    Positioned(
-                      top: 100,
-                      left: -50,
-                      right: -50,
-                      child: Opacity(
-                        opacity: 0.1,
-                        child: Text(
-                          'Your Perfect Out',
-                          style: GoogleFonts.poppins(
-                            fontSize: 120,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                            letterSpacing: -1,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    // Main Content
-                    Center(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          final isMobile = constraints.maxWidth < 600;
-                          final titleSize = isMobile ? 36.0 : 64.0;
-                          final taglineSize = isMobile ? 16.0 : 18.0;
-                          final horizontalPadding = isMobile ? 20.0 : 40.0;
+              child: Center(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 600;
+                    final titleSize = isMobile ? 36.0 : 64.0;
+                    final taglineSize = isMobile ? 16.0 : 18.0;
+                    final horizontalPadding = isMobile ? 20.0 : 40.0;
 
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(height: isMobile ? 40 : 60),
-                              // Main Title
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalPadding,
-                                ),
-                                child: Text(
-                                  'Every Single Day',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: titleSize,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                    letterSpacing: -1,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              const SizedBox(height: 24),
-                              // Tagline
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: horizontalPadding,
-                                ),
-                                child: Text(
-                                  'Track your calories, monitor your macros, and achieve your nutrition goals with personalized meal plans and verified nutrition data.',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: taglineSize,
-                                    color: Colors.grey[700],
-                                    height: 1.6,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              SizedBox(height: isMobile ? 40 : 60),
-                              // App Store Buttons
-                              isMobile
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        _buildAppStoreButton(
-                                          icon: Icons.apple,
-                                          topText: 'Download on the',
-                                          bottomText: 'App Store',
-                                          onTap: () {},
-                                          isMobile: true,
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Stack(
-                                          clipBehavior: Clip.none,
-                                          children: [
-                                            _buildAppStoreButton(
-                                              icon: Icons.android,
-                                              topText: 'GET IT ON',
-                                              bottomText: 'Google Play',
-                                              onTap: () {},
-                                              isMobile: true,
-                                            ),
-                                            Positioned(
-                                              top: -8,
-                                              right: -8,
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      horizontal: 12,
-                                                      vertical: 4,
-                                                    ),
-                                                decoration: BoxDecoration(
-                                                  color: const Color(
-                                                    0xFFE91E63,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                child: const Text(
-                                                  'Soon',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        _buildAppStoreButton(
-                                          icon: Icons.apple,
-                                          topText: 'Download on the',
-                                          bottomText: 'App Store',
-                                          onTap: () {},
-                                          isMobile: false,
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Stack(
-                                          clipBehavior: Clip.none,
-                                          children: [
-                                            _buildAppStoreButton(
-                                              icon: Icons.android,
-                                              topText: 'GET IT ON',
-                                              bottomText: 'Google Play',
-                                              onTap: () {},
-                                              isMobile: false,
-                                            ),
-                                            Positioned(
-                                              top: -8,
-                                              right: -8,
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      horizontal: 12,
-                                                      vertical: 4,
-                                                    ),
-                                                decoration: BoxDecoration(
-                                                  color: const Color(
-                                                    0xFFE91E63,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                child: const Text(
-                                                  'Soon',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            /// Additional Content Sections with Blur Effect
-            SliverToBoxAdapter(
-              child: ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: blurIntensity * 0.5,
-                    sigmaY: blurIntensity * 0.5,
-                  ),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final isMobile = constraints.maxWidth < 600;
-                      return Container(
-                        padding: EdgeInsets.all(isMobile ? 20 : 40),
-                        color: Colors.transparent,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Features',
-                              style: GoogleFonts.poppins(
-                                fontSize: isMobile ? 24 : 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[900],
-                              ),
-                            ),
-                            SizedBox(height: isMobile ? 30 : 40),
-                            _buildFeatureSection(),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-            // Stats Section
-            SliverToBoxAdapter(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final isMobile = constraints.maxWidth < 600;
-                  return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 20 : 40,
-                      vertical: isMobile ? 60 : 100,
-                    ),
-                    child: Column(
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Main Heading
-                        Column(
-                          children: [
-                            Text(
-                              'AI-Powered',
-                              style: GoogleFonts.poppins(
-                                fontSize: isMobile ? 28 : 36,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                letterSpacing: -0.5,
-                              ),
-                              textAlign: TextAlign.center,
+                        SizedBox(height: isMobile ? 40 : 60),
+                        // Main Title
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalPadding,
+                          ),
+                          child: Text(
+                            'Every Single Day With FoodZeen',
+                            style: GoogleFonts.poppins(
+                              fontSize: titleSize,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                              letterSpacing: -1,
                             ),
-                            const SizedBox(height: 8),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: isMobile ? 20 : 0,
-                              ),
-                              child: Text(
-                                'Calorie Counter & Diet Plans',
-                                style: GoogleFonts.poppins(
-                                  fontSize: isMobile ? 40 : 64,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.black,
-                                  letterSpacing: -1,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        // Tagline
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: horizontalPadding,
+                          ),
+                          child: Text(
+                            'Track your calories, monitor your macros, and achieve your nutrition goals with personalized meal plans and verified nutrition data.',
+                            style: GoogleFonts.poppins(
+                              fontSize: taglineSize,
+                              color: Colors.grey[700],
+                              height: 1.6,
                             ),
-                          ],
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                         SizedBox(height: isMobile ? 40 : 60),
-                        // Stats Cards
-                        LayoutBuilder(
-                          builder: (context, cardConstraints) {
-                            if (cardConstraints.maxWidth > 700) {
-                              return Row(
+                        // App Store Buttons
+                        isMobile
+                            ? Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  _buildStatCard(
-                                    topText: '10M+',
-                                    middleText: 'people worldwide',
-                                    bottomText: 'trust us',
+                                  _buildAppStoreButton(
+                                    icon: Icons.apple,
+                                    topText: 'Download on the',
+                                    bottomText: 'App Store',
+                                    onTap: () {},
+                                    isMobile: true,
                                   ),
-                                  const SizedBox(width: 24),
-                                  _buildStatCard(
-                                    topText: '4.9',
-                                    middleText: 'out of 5 stars',
-                                    bottomText: '',
-                                    showStars: true,
-                                    showLaurel: true,
+                                  const SizedBox(height: 16),
+                                  Stack(
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      _buildAppStoreButton(
+                                        icon: Icons.android,
+                                        topText: 'GET IT ON',
+                                        bottomText: 'Google Play',
+                                        onTap: () {},
+                                        isMobile: true,
+                                      ),
+                                      Positioned(
+                                        top: -8,
+                                        right: -8,
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFE91E63),
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            'Soon',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              );
-                            } else {
-                              return Column(
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  _buildStatCard(
-                                    topText: '10M+',
-                                    middleText: 'people worldwide',
-                                    bottomText: 'trust us',
+                                  _buildAppStoreButton(
+                                    icon: Icons.apple,
+                                    topText: 'Download on the',
+                                    bottomText: 'App Store',
+                                    onTap: () {},
+                                    isMobile: false,
                                   ),
-                                  const SizedBox(height: 24),
-                                  _buildStatCard(
-                                    topText: '4.9',
-                                    middleText: 'out of 5 stars',
-                                    bottomText: '',
-                                    showStars: true,
-                                    showLaurel: true,
+                                  const SizedBox(width: 20),
+                                  Stack(
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      _buildAppStoreButton(
+                                        icon: Icons.android,
+                                        topText: 'GET IT ON',
+                                        bottomText: 'Google Play',
+                                        onTap: () {},
+                                        isMobile: false,
+                                      ),
+                                      Positioned(
+                                        top: -8,
+                                        right: -8,
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 4,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFE91E63),
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            'Soon',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              );
-                            }
-                          },
-                        ),
+                              ),
                       ],
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
             // Loved by Thousands Section
@@ -527,16 +334,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.symmetric(
                       horizontal: isMobile ? 20 : 40,
                       vertical: isMobile ? 60 : 100,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          const Color(0xFFFFE5F1), // Light pink
-                          const Color(0xFFFFF8E1), // Light cream/yellow
-                        ],
-                      ),
                     ),
                     child: Column(
                       children: [
