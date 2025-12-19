@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         child: CustomScrollView(
-          controller: _scrollController,
+          controller: ModalScrollController.of(context),
           slivers: [
             /// App Bar with Blur Effect
             SliverAppBar(
