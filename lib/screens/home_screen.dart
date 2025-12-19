@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            // App Bar with Blur Effect
+            /// App Bar with Blur Effect
             SliverAppBar(
               expandedHeight: 100,
               collapsedHeight: 100,
