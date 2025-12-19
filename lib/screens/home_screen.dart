@@ -6,6 +6,7 @@ import 'package:foodzeen/screens/contact_us_screen.dart';
 import 'package:foodzeen/screens/privacy_policy_screen.dart';
 import 'package:foodzeen/screens/terms_of_use_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,6 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  Future<void> _openAppStore() async {
+    final url = Uri.parse('https://apps.apple.com/uz/app/foodzeen/id6755245761');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    }
   }
 
   @override
@@ -256,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     icon: Icons.apple,
                                     topText: 'Download on the',
                                     bottomText: 'App Store',
-                                    onTap: () {},
+                                    onTap: _openAppStore,
                                     isMobile: true,
                                   ),
                                   const SizedBox(height: 16),
@@ -305,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     icon: Icons.apple,
                                     topText: 'Download on the',
                                     bottomText: 'App Store',
-                                    onTap: () {},
+                                    onTap: _openAppStore,
                                     isMobile: false,
                                   ),
                                   const SizedBox(width: 20),
