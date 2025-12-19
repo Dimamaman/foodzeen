@@ -36,6 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.1.0
   modal_bottom_sheet: ^3.0.0
+  dio: ^5.4.0
+  device_info_plus: ^9.1.0
+  package_info_plus: ^5.0.1
 
 dev_dependencies:
   flutter_test:

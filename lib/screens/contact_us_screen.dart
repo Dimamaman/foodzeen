@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key});
@@ -14,6 +19,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   bool _isSubmitting = false;
+
+  // Telegram Bot API configuration
+  // Replace with your actual bot token and chat ID
+  static const String _telegramApiUrl =
+      'https://api.telegram.org/bot8319773196:AAE6fprYnhNfWqO0kLZRGrf0TCsHPIIZJLE/sendMessage';
+  static const String _chatId =
+      '-1003123619749'; // Your Telegram chat ID or channel username
 
   @override
   void initState() {
@@ -43,22 +55,191 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   void _handleSubmit() {
     if (!_isFormValid || _isSubmitting) return;
+    _sendMessage();
+  }
 
-    setState(() {
-      _isSubmitting = true;
-    });
+  Future<void> _sendMessage() async {
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final message = _messageController.text.trim();
 
-    // Simulate API call
-    Future.delayed(const Duration(seconds: 1), () {
-      if (mounted) {
-        setState(() {
-          _isSubmitting = false;
-          _nameController.clear();
-          _emailController.clear();
-          _messageController.clear();
-        });
+    if (message.isNotEmpty && !_isSubmitting) {
+      setState(() {
+        _isSubmitting = true;
+      });
+
+      await Future.delayed(Duration(milliseconds: 300));
+
+      try {
+        // Get user info and device metadata
+        final userInfo = await _getUserInfo();
+        final deviceMetadata = await _getDeviceMetadata();
+
+        // Format the message with user info and metadata
+        final formattedMessage = _formatSupportMessage(
+          name: name,
+          email: email,
+          message: message,
+          userInfo: userInfo,
+          metadata: deviceMetadata,
+        );
+
+        final dio = Dio();
+        final response = await dio.post(
+          _telegramApiUrl,
+          data: {
+            'chat_id': _chatId,
+            'text': formattedMessage,
+            'parse_mode': 'HTML',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          final responseData = response.data;
+          if (responseData['ok'] == true) {
+            if (mounted) {
+              _nameController.clear();
+              _emailController.clear();
+              _messageController.clear();
+            }
+          } else {
+            if (mounted) {
+              _showErrorDialog(
+                'Failed to send message: ${responseData['description']}',
+              );
+            }
+          }
+        } else {
+          if (mounted) {
+            _showErrorDialog('Network error: ${response.statusCode}');
+          }
+        }
+      } catch (e) {
+        if (mounted) {
+          _showErrorDialog('Error: $e');
+        }
+      } finally {
+        if (mounted) {
+          setState(() {
+            _isSubmitting = false;
+          });
+        }
       }
+    }
+  }
+
+  Future<Map<String, String>> _getUserInfo() async {
+    try {
+      final packageInfo = await PackageInfo.fromPlatform();
+      return {
+        'app_name': packageInfo.appName,
+        'app_version': packageInfo.version,
+        'package_name': packageInfo.packageName,
+        'build_number': packageInfo.buildNumber,
+      };
+    } catch (e) {
+      return {'error': 'Could not get app info: $e'};
+    }
+  }
+
+  Future<Map<String, String>> _getDeviceMetadata() async {
+    try {
+      final deviceInfo = DeviceInfoPlugin();
+      Map<String, String> metadata = {};
+
+      if (Platform.isAndroid) {
+        final androidInfo = await deviceInfo.androidInfo;
+        metadata = {
+          'platform': 'Android',
+          'device': androidInfo.model,
+          'manufacturer': androidInfo.manufacturer,
+          'android_version': androidInfo.version.release,
+          'sdk_version': androidInfo.version.sdkInt.toString(),
+        };
+      } else if (Platform.isIOS) {
+        final iosInfo = await deviceInfo.iosInfo;
+        metadata = {
+          'platform': 'iOS',
+          'device': iosInfo.model,
+          'device_name': iosInfo.name,
+          'ios_version': iosInfo.systemVersion,
+          'identifier': iosInfo.identifierForVendor ?? 'Unknown',
+        };
+      } else {
+        metadata = {'platform': Platform.operatingSystem};
+      }
+
+      return metadata;
+    } catch (e) {
+      return {'error': 'Could not get device info: $e'};
+    }
+  }
+
+  String _formatSupportMessage({
+    required String name,
+    required String email,
+    required String message,
+    required Map<String, String> userInfo,
+    required Map<String, String> metadata,
+  }) {
+    final buffer = StringBuffer();
+    buffer.writeln('<b>📧 New Contact From Website</b>\n');
+    buffer.writeln('<b>Name:</b> $name');
+    buffer.writeln('<b>Email:</b> $email\n');
+    buffer.writeln('<b>Message:</b>');
+    buffer.writeln(message);
+    buffer.writeln('\n<b>📱 Device Information:</b>');
+
+    metadata.forEach((key, value) {
+      buffer.writeln('• <b>$key:</b> $value');
     });
+
+    buffer.writeln('\n<b>📦 App Information:</b>');
+    userInfo.forEach((key, value) {
+      buffer.writeln('• <b>$key:</b> $value');
+    });
+
+    buffer.writeln('\n<b>🕐 Time:</b> ${DateTime.now().toIso8601String()}');
+
+    return buffer.toString();
+  }
+
+  void _showSuccessDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: const Text('Success'),
+        content: const Text(
+          'Thank you for your message! We\'ll get back to you soon.',
+        ),
+        actions: [
+          CupertinoDialogAction(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showErrorDialog(String errorMessage) {
+    showCupertinoDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: const Text('Error'),
+        content: Text(errorMessage),
+        actions: [
+          CupertinoDialogAction(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -91,7 +272,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               // App Bar
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 12 : isMobile ? 16 : 24,
+                  horizontal: isSmallScreen
+                      ? 12
+                      : isMobile
+                      ? 16
+                      : 24,
                   vertical: isSmallScreen ? 12 : 16,
                 ),
                 child: Row(
@@ -111,7 +296,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       child: Text(
                         'Contact Us',
                         style: GoogleFonts.poppins(
-                          fontSize: isSmallScreen ? 16 : isMobile ? 20 : 24,
+                          fontSize: isSmallScreen
+                              ? 16
+                              : isMobile
+                              ? 20
+                              : 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
                         ),
@@ -125,7 +314,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(
-                    horizontal: isSmallScreen ? 12 : isMobile ? 16 : 40,
+                    horizontal: isSmallScreen
+                        ? 12
+                        : isMobile
+                        ? 16
+                        : 40,
                     vertical: isSmallScreen ? 12 : 20,
                   ),
                   child: Column(
@@ -135,7 +328,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       Text(
                         'Send us a message',
                         style: GoogleFonts.poppins(
-                          fontSize: isSmallScreen ? 18 : isMobile ? 20 : 24,
+                          fontSize: isSmallScreen
+                              ? 18
+                              : isMobile
+                              ? 20
+                              : 24,
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
                         ),
@@ -177,22 +374,33 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           onPressed: _isFormValid && !_isSubmitting
                               ? _handleSubmit
                               : null,
-                          color: _isFormValid
+                          color: _isSubmitting
+                              ? CupertinoColors.activeGreen.withOpacity(0.7)
+                              : _isFormValid
                               ? CupertinoColors.activeGreen
                               : CupertinoColors.inactiveGray,
                           borderRadius: BorderRadius.circular(12),
                           padding: EdgeInsets.symmetric(
-                            vertical: isSmallScreen ? 14 : isMobile ? 16 : 18,
+                            vertical: isSmallScreen
+                                ? 14
+                                : isMobile
+                                ? 16
+                                : 18,
                           ),
                           minSize: isSmallScreen ? 44 : 48,
                           child: _isSubmitting
                               ? const CupertinoActivityIndicator(
                                   color: CupertinoColors.white,
+                                  radius: 10,
                                 )
                               : Text(
                                   'Submit',
                                   style: GoogleFonts.poppins(
-                                    fontSize: isSmallScreen ? 14 : isMobile ? 16 : 18,
+                                    fontSize: isSmallScreen
+                                        ? 14
+                                        : isMobile
+                                        ? 16
+                                        : 18,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),
@@ -231,10 +439,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       decoration: BoxDecoration(
         color: CupertinoColors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: CupertinoColors.separator,
-          width: 0.5,
-        ),
+        border: Border.all(color: CupertinoColors.separator, width: 0.5),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,14 +455,22 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 Icon(
                   icon,
                   color: CupertinoColors.activeGreen,
-                  size: isSmallScreen ? 16 : isMobile ? 18 : 20,
+                  size: isSmallScreen
+                      ? 16
+                      : isMobile
+                      ? 18
+                      : 20,
                 ),
                 SizedBox(width: isSmallScreen ? 6 : 8),
                 Flexible(
                   child: Text(
                     label,
                     style: GoogleFonts.poppins(
-                      fontSize: isSmallScreen ? 11 : isMobile ? 12 : 14,
+                      fontSize: isSmallScreen
+                          ? 11
+                          : isMobile
+                          ? 12
+                          : 14,
                       color: CupertinoColors.secondaryLabel,
                       fontWeight: FontWeight.w500,
                     ),
@@ -274,11 +487,19 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             minLines: maxLines > 1 ? maxLines : 1,
             placeholder: hint,
             placeholderStyle: GoogleFonts.poppins(
-              fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
+              fontSize: isSmallScreen
+                  ? 12
+                  : isMobile
+                  ? 14
+                  : 16,
               color: CupertinoColors.placeholderText,
             ),
             style: GoogleFonts.poppins(
-              fontSize: isSmallScreen ? 12 : isMobile ? 14 : 16,
+              fontSize: isSmallScreen
+                  ? 12
+                  : isMobile
+                  ? 14
+                  : 16,
               color: CupertinoColors.label,
             ),
             padding: EdgeInsets.symmetric(
