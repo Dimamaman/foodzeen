@@ -6,7 +6,6 @@ import 'package:foodzeen/screens/contact_us_screen.dart';
 import 'package:foodzeen/screens/privacy_policy_screen.dart';
 import 'package:foodzeen/screens/terms_of_use_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,12 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         child: CustomScrollView(
-          controller: ModalScrollController.of(context),
+          controller: _scrollController,
           slivers: [
             /// App Bar with Blur Effect
             SliverAppBar(
-              expandedHeight: 100,
-              collapsedHeight: 100,
+              expandedHeight: 50,
+              collapsedHeight: 65,
               pinned: true,
               floating: false,
               elevation: 0,
@@ -722,12 +721,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  AnimatedCrossFade(
-                    firstChild: const SizedBox.shrink(),
-                    secondChild: Container(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
+                  if (isExpanded)
+                    AnimatedSize(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 24),
                         child: Text(
                           faq['answer'] as String,
                           style: GoogleFonts.poppins(
@@ -735,14 +734,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.grey[700],
                             height: 1.6,
                           ),
+                          textAlign: TextAlign.left,
                         ),
                       ),
                     ),
-                    crossFadeState: isExpanded
-                        ? CrossFadeState.showSecond
-                        : CrossFadeState.showFirst,
-                    duration: const Duration(milliseconds: 200),
-                  ),
                   if (index < faqs.length - 1)
                     Divider(thickness: 0.5, color: Colors.grey[300]),
                 ],
