@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodzeen/screens/contact_us_screen.dart';
+import 'package:foodzeen/screens/privacy_policy_screen.dart';
+import 'package:foodzeen/screens/terms_of_use_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -77,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: LayoutBuilder(
                           builder: (context, constraints) {
                             final isMobile = constraints.maxWidth < 600;
+                            final textSize = isMobile ? 12.0 : 14.0;
                             return Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: isMobile ? 16 : 20,
@@ -131,32 +135,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ContactUsScreen(),
+                                            ),
+                                          );
+                                        },
                                         child: Text(
                                           'Contact Us',
                                           style: GoogleFonts.poppins(
                                             color: Colors.black87,
-                                            fontSize: 14,
+                                            fontSize: textSize,
                                           ),
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const TermsOfUseScreen(),
+                                            ),
+                                          );
+                                        },
                                         child: Text(
                                           'Terms',
                                           style: GoogleFonts.poppins(
                                             color: Colors.black87,
-                                            fontSize: 14,
+                                            fontSize: textSize,
                                           ),
                                         ),
                                       ),
                                       TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const PrivacyPolicyScreen(),
+                                            ),
+                                          );
+                                        },
                                         child: Text(
                                           'Privacy',
                                           style: GoogleFonts.poppins(
                                             color: Colors.black87,
-                                            fontSize: 14,
+                                            fontSize: textSize,
                                           ),
                                         ),
                                       ),
