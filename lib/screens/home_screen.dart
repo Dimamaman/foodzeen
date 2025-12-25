@@ -37,7 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openAppStore() async {
-    final url = Uri.parse('https://apps.apple.com/uz/app/foodzeen/id6755245761');
+    final url = Uri.parse(
+      'https://apps.apple.com/uz/app/foodzeen/id6755245761',
+    );
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
     }
@@ -409,7 +411,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   _buildLovedByCard(
-                                    topText: '100K+',
+                                    topText: '10K+',
                                     bottomText: 'Active Users',
                                   ),
                                   const SizedBox(width: 24),
@@ -420,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   const SizedBox(width: 24),
                                   _buildLovedByCard(
-                                    topText: '1M+',
+                                    topText: '100K+',
                                     bottomText: 'Meals Tracked',
                                   ),
                                 ],
