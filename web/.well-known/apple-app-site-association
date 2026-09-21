@@ -1,0 +1,9 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [{
+      "appID": "A4T45VU6QC.com.example.deepLink",
+      "paths": ["/products/*", "/profile/*", "/settings"]
+    }]
+  }
+}
